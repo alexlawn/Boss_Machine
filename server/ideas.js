@@ -11,6 +11,9 @@ const {
   deleteFromDatabasebyId,
 } = require('./db');
 
+// require the helper function from checkMillionDollarIdea.js
+const checkMillionDollarIdea = require('./checkMillionDollarIdea');
+
 ideasRouter.param('ideaId ', (req, res, next, id) => {
     const idea = getFromDatabaseById('ideas', id);
     if (idea) {
@@ -27,7 +30,7 @@ ideasRouter.get('/', (req, res, next) => {
     });
 
 // POST /api/ideas to create a new idea and save it to the database
-ideasRouter.post('/', (req, res, next) => {
+ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
     const newIdea = addToDatabase('ideas', req.body);
     res.status(201).send(newIdea); // 201 Created
 });
