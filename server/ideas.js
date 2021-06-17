@@ -14,7 +14,7 @@ const {
 // require the helper function from checkMillionDollarIdea.js
 const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
-ideasRouter.param('ideaId ', (req, res, next, id) => {
+ideasRouter.param('ideaId', (req, res, next, id) => {
     const idea = getFromDatabaseById('ideas', id);
     if (idea) {
         req.idea = idea;
@@ -37,8 +37,15 @@ ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
 
 // GET /api/ideas/:ideaId to get a single idea by id  
 ideasRouter.get('/:ideaId', (req, res, next) => {
+    idea = {
+        ideaId: 1,
+        name: 'name',
+        description: 'description',
+        weeklyRevenue: 'weeklyRevenue',
+        numWeeks: 'numWeeks'
+    };
     res.send(req.idea);
-    });
+});
 
 // PUT /api/ideas/:ideaId to update a single idea by id
 ideasRouter.put('/:ideaId', (req, res, next) => {
